@@ -33,11 +33,11 @@ func newDummyDoer(status string, status_code int) *dummyDoer {
 func TestNewCustomerIO(t *testing.T) {
 	customer_io := NewCustomerIO(site_id, api_key)
 
-	if customer_io.site_id != site_id {
+	if customer_io.SiteID != site_id {
 		t.Errorf("Invalid site id was associated to the customer.io client")
 	}
 
-	if customer_io.api_key != api_key {
+	if customer_io.ApiKey != api_key {
 		t.Errorf("Invalid api key was associated to the customer.io client")
 	}
 }
@@ -75,7 +75,7 @@ func TestCustomerIOIdentify(t *testing.T) {
 func TestCustomerIOSetDoer(t *testing.T) {
 	customer_io := NewCustomerIO(site_id, api_key)
 
-	if customer_io.request_doer == nil {
+	if customer_io.Doer == nil {
 		t.Errorf("The default request doer was not set")
 	}
 
@@ -83,7 +83,7 @@ func TestCustomerIOSetDoer(t *testing.T) {
 
 	customer_io.SetDoer(dummy_doer)
 
-	if customer_io.request_doer != dummy_doer {
+	if customer_io.Doer != dummy_doer {
 		t.Errorf("The request doer was not overwritten properly")
 	}
 
