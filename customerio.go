@@ -60,7 +60,7 @@ func (cio *CustomerIO) sendRequest(method, url string, body io.Reader) (*http.Re
 
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
-	if resp, err = cio.doer.Do(req); err != nil {
+	if resp, err = cio.Doer.Do(req); err != nil {
 		return nil, err
 	}
 
@@ -68,7 +68,7 @@ func (cio *CustomerIO) sendRequest(method, url string, body io.Reader) (*http.Re
 }
 
 func (cio *CustomerIO) SetDoer(doer Doer) {
-	cio.doer = doer
+	cio.Doer = doer
 }
 
 func (cio *CustomerIO) Track(customer_id, name string, data map[string]string) error {

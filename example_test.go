@@ -1,6 +1,7 @@
 package customerio_test
 
 import (
+	"fmt"
 	"github.com/bmoyles0117/customerio-golang"
 )
 
