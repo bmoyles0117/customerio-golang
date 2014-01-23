@@ -72,6 +72,32 @@ func TestCustomerIOIdentify(t *testing.T) {
 	}
 }
 
+func TestCustomerIODelete(t *testing.T) {
+	dummy_doer := newDummyDoer("200 OK", 200)
+	customer_io := NewCustomerIO(site_id, api_key)
+	customer_io.SetDoer(dummy_doer)
+
+	if err := customer_io.Identify("5", map[string]string{
+		"email": "customer@example.com",
+		"name":  "Bob",
+		"plan":  "premium",
+	}); err != nil {
+		t.Errorf("An error was returned by customer io Identify %s", err)
+	}
+
+	if err := customer_io.Delete("5"); err != nil {
+		t.Errorf("An error was returned by customer io Delete %s", err)
+	}
+
+	if !dummy_doer.was_called {
+		t.Errorf("Dummy doer was never called, indicating the request would not have actually been invoked.")
+	}
+
+	if dummy_doer.request_called.Method != "DELETE" {
+		t.Errorf("Request method not populated as expected")
+	}
+}
+
 func TestCustomerIOSetDoer(t *testing.T) {
 	customer_io := NewCustomerIO(site_id, api_key)
 

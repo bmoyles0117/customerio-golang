@@ -47,6 +47,12 @@ func (cio *CustomerIO) Identify(customer_id string, data map[string]string) erro
 	return err
 }
 
+func (cio *CustomerIO) Delete(customer_id string) error {
+	_, err := cio.sendRequest("DELETE", cio.getEndpointUrl("/customers/"+customer_id), nil)
+
+	return err
+}
+
 func (cio *CustomerIO) sendRequest(method, url string, body io.Reader) (*http.Response, error) {
 	var (
 		err  error
