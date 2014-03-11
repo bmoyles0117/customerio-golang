@@ -69,6 +69,7 @@ func (cio *CustomerIO) sendRequest(method, url string, body io.Reader) (*http.Re
 	if resp, err = cio.Doer.Do(req); err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	return resp, nil
 }
